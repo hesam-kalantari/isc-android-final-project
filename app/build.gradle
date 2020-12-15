@@ -1,0 +1,98 @@
+import dependencies.Versions
+import dependencies.Application
+import dependencies.AnnotationProcessing
+import dependencies.Dependencies
+import dependencies.SupportDependencies
+import dependencies.Java
+import dependencies.AndroidTestDependencies
+
+apply plugin: "com.android.application"
+apply plugin: "androidx.navigation.safeargs"
+apply plugin: "dagger.hilt.android.plugin"
+apply from: "$rootDir/spotless.gradle"
+
+android {
+    compileSdkVersion Versions.compile_sdk
+    buildToolsVersion "29.0.3"
+
+    defaultConfig {
+        applicationId Application.id
+        minSdkVersion Versions.min_sdk
+        targetSdkVersion Versions.target_sdk
+        versionCode Application.version_code
+        versionName Application.version_name
+
+        vectorDrawables.useSupportLibrary = true
+
+        testInstrumentationRunner AndroidTestDependencies.instrumentation_runner
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    compileOptions {
+        // Flag to enable support for the new language APIs
+        coreLibraryDesugaringEnabled true
+
+        sourceCompatibility = Java.java_version
+        targetCompatibility = Java.java_version
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+
+    //support
+    implementation SupportDependencies.app_compat
+    implementation SupportDependencies.constraint_layout
+    implementation SupportDependencies.material_design
+    implementation SupportDependencies.swipe_refresh_layout
+    implementation 'androidx.navigation:navigation-fragment:2.3.2'
+    implementation 'androidx.navigation:navigation-ui:2.3.2'
+
+    //annotation processor
+    annotationProcessor AnnotationProcessing.lombok
+    annotationProcessor AnnotationProcessing.dagger_hilt_compiler
+    annotationProcessor AnnotationProcessing.glide_compiler
+    annotationProcessor AnnotationProcessing.hilt_android_compiler
+    annotationProcessor AnnotationProcessing.map_struct
+    annotationProcessor AnnotationProcessing.room_compiler
+
+
+
+    // hilt dependencies
+    implementation Dependencies.dagger_hilt
+    implementation Dependencies.hilt_android
+
+    //retrofit
+    implementation Dependencies.ok_http
+    implementation Dependencies.ok_http_logging_interceptor
+    implementation Dependencies.retrofit
+    implementation Dependencies.retrofit_jakson
+
+    implementation Dependencies.room_runtime
+
+    implementation Dependencies.glide
+
+    compileOnly Dependencies.lombok
+
+    implementation Dependencies.apache_commons_lang3
+    implementation Dependencies.map_struct
+
+    implementation Dependencies.timber
+    implementation Dependencies.sdp
+
+    coreLibraryDesugaring Java.desugar_jdk_libs
+
+}

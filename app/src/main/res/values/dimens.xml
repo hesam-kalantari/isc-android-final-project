@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="half_margin">@dimen/_8sdp</dimen>
+    <dimen name="wide_margin">@dimen/_16sdp</dimen>
+    <dimen name="double_margin">@dimen/_32sdp</dimen>
+</resources>

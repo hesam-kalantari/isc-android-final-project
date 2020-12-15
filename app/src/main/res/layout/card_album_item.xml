@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="album"
+            type="com.quorum.album.domain.model.Album" />
+
+        <variable
+            name="listener"
+            type="com.quorum.album.ui.albumlist.AlbumAdapter.AlbumListener" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="2dp"
+        app:cardUseCompatPadding="true"
+        android:onClick="@{() -> listener.onChooseAlbum(album)}">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <ImageView
+                android:id="@+id/image_album"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:layout_marginTop="@dimen/wide_margin"
+                android:layout_marginEnd="@dimen/wide_margin"
+                android:layout_marginBottom="@dimen/wide_margin"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@mipmap/ic_place_holder" />
+
+            <TextView
+                android:id="@+id/text_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/double_margin"
+                android:text="@{album.name}"
+                app:layout_constraintEnd_toStartOf="@+id/image_album"
+                app:layout_constraintTop_toTopOf="@+id/image_album"
+                tools:text="دود عود" />
+
+            <TextView
+                android:id="@+id/text_artist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/double_margin"
+                android:text="@{album.artist}"
+                app:layout_constraintBottom_toBottomOf="@+id/image_album"
+                app:layout_constraintEnd_toStartOf="@+id/image_album"
+                tools:text="شجریان" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/albumListFragment">
+
+    <fragment
+        android:id="@+id/albumListFragment"
+        android:name="com.quorum.album.ui.albumlist.AlbumListFragment"
+        tools:layout="@layout/fragment_album_list"
+        android:label="AlbumListFragment" >
+        <action
+            android:id="@+id/action_albumListFragment_to_albumDetailFragment"
+            app:destination="@id/albumDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/albumDetailFragment"
+        android:name="com.quorum.album.ui.albumdetail.AlbumDetailFragment"
+        tools:layout="@layout/fragment_album_detail"
+        android:label="AlbumDetailFragment" >
+        <argument
+            android:name="selectedAlbum"
+            app:argType="com.quorum.album.domain.model.Album" />
+    </fragment>
+</navigation>
